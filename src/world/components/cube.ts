@@ -1,4 +1,5 @@
 import { BoxBufferGeometry, Mesh, MeshStandardMaterial, Scene } from "three";
+import { RADIANS_PER_SECOND } from "../../constants";
 
 export class CubeWithTick {
     private _internal: Mesh<BoxBufferGeometry, MeshStandardMaterial>;
@@ -11,11 +12,11 @@ export class CubeWithTick {
         scene.add(this._internal)
     }
 
-    tick() {
+    tick(delta: number) {
         // increase the cube's rotation each frame
-        this._internal.rotation.z += 0.01;
-        this._internal.rotation.x += 0.01;
-        this._internal.rotation.y += 0.01;
+        this._internal.rotation.z += RADIANS_PER_SECOND * delta;
+        this._internal.rotation.x += RADIANS_PER_SECOND * delta;
+        this._internal.rotation.y += RADIANS_PER_SECOND * delta;
     }
 }
 
