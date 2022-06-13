@@ -24,6 +24,9 @@ export class World {
       this._scene.add(cube, light);
   
       const resizer = new Resizer(container, this._camera, this._renderer);
+      resizer.onResize = () => {
+        this.render();
+      };
     }
   
     render() {
