@@ -1,4 +1,5 @@
-import { BoxBufferGeometry, Mesh, MeshStandardMaterial, Scene } from "three";
+import { BoxBufferGeometry, Mesh, MeshStandardMaterial, Scene, TextureLoader } from "three";
+
 import { RADIANS_PER_SECOND } from "../../constants";
 
 export class CubeWithTick {
@@ -22,10 +23,7 @@ export class CubeWithTick {
 
 export const createCube = () => {
     const geometry = new BoxBufferGeometry(2, 2, 2);
-
-    const material = new MeshStandardMaterial({ color: 'purple' });
-  
-    const cube = new Mesh(geometry, material);
+    const cube = new Mesh(geometry, createMaterial());
   
     cube.position.x = -0.5;
     cube.position.y = -0.1;
@@ -34,12 +32,15 @@ export const createCube = () => {
     // equivalent to:
     // cube.position.set(-0.5, -0.1, 1);
   
-    cube.scale.x = 1.25;
-    cube.scale.y = 0.25;
-    cube.scale.z = 0.5;
-  
-    // equivalent to:
-    // cube.scale.set(1.25, 0.25, 0.5);
-
     return new CubeWithTick(cube);
+}
+
+const createMaterial = () => {
+    // create a texture loader.
+    const textureLoader = new TextureLoader();
+    // load a texture
+    const texture = textureLoader.load('/assets/textures/uv-test-bw.png');
+    // create a "standard" material using
+    // the texture we just loaded as a color map
+    return new MeshStandardMaterial({ map: texture });
 }
