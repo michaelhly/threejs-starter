@@ -25,12 +25,7 @@ export const createCube = () => {
     const geometry = new BoxBufferGeometry(2, 2, 2);
     const cube = new Mesh(geometry, createMaterial());
   
-    cube.position.x = -0.5;
-    cube.position.y = -0.1;
-    cube.position.z = 1;
-  
-    // equivalent to:
-    // cube.position.set(-0.5, -0.1, 1);
+    cube.rotation.set(-0.5, -0.1, 0.8);
   
     return new CubeWithTick(cube);
 }

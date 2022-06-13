@@ -4,6 +4,7 @@ import { createCamera } from "./components/camera";
 import { createCube } from "./components/cube";
 import { createLights } from "./components/lights";
 import { createScene } from "./components/scene";
+import { createControls } from "./systems/controls";
 import { Loop } from "./systems/Loop";
 import { createRenderer } from "./systems/renderer";
 import { Resizer } from "./systems/Resizer";
@@ -20,15 +21,20 @@ export class World {
       this._renderer = createRenderer();
       this._loop = new Loop(this._camera, this._scene, this._renderer)
       container.append(this._renderer.domElement);
+
+      const controls = createControls(this._camera, this._renderer.domElement);
+      controls.addEventListener("change", () => { this.render() })
+      this._loop.updateables.push(controls);
   
       const cube = createCube();
       const light = createLights();
 
-      this._loop.updateables.push(cube);
+      // disabled the cube's animation
+      // this._loop.updateables.push(cube);
       
       cube.addToScene(this._scene)
       this._scene.add(light);
-  
+
       new Resizer(container, this._camera, this._renderer);
     }
   
