@@ -1,4 +1,23 @@
-import { BoxBufferGeometry, MathUtils, Mesh, MeshStandardMaterial } from "three";
+import { BoxBufferGeometry, Mesh, MeshStandardMaterial, Scene } from "three";
+
+export class CubeWithTick {
+    private _internal: Mesh<BoxBufferGeometry, MeshStandardMaterial>;
+
+    constructor(cube: Mesh<BoxBufferGeometry, MeshStandardMaterial>) {
+        this._internal = cube;
+    }
+
+    addToScene(scene: Scene) {
+        scene.add(this._internal)
+    }
+
+    tick() {
+        // increase the cube's rotation each frame
+        this._internal.rotation.z += 0.01;
+        this._internal.rotation.x += 0.01;
+        this._internal.rotation.y += 0.01;
+    }
+}
 
 export const createCube = () => {
     const geometry = new BoxBufferGeometry(2, 2, 2);
@@ -20,12 +39,6 @@ export const createCube = () => {
   
     // equivalent to:
     // cube.scale.set(1.25, 0.25, 0.5);
-  
-    // to rotate using degrees, they must
-    // first be converted to radians
-    cube.rotation.x = MathUtils.degToRad(-60);
-    cube.rotation.y = MathUtils.degToRad(-45);
-    cube.rotation.z = MathUtils.degToRad(60);
-  
-    return cube;
+
+    return new CubeWithTick(cube);
 }
