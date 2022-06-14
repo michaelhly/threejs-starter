@@ -27,9 +27,12 @@ export const createMeshGroup = () => {
     // create twenty clones of the protoSphere
     const clones = new Array(20).fill(null).map((_, i) => {
         const clone = protoSphere.clone()
-        clone.position.x = Math.cos(2 * Math.PI * i * 0.05)
-        clone.position.y = Math.sin(2 * Math.PI * i * 0.05)
-        clone.scale.multiplyScalar(0.01 + i * 0.05);
+        const POSITION_EPSILON = 0.05;
+        clone.position.x = Math.cos(2 * Math.PI * i * POSITION_EPSILON)
+        clone.position.y = Math.sin(2 * Math.PI * i * POSITION_EPSILON)
+        clone.position.z = -i * POSITION_EPSILON * 5;
+
+        clone.scale.multiplyScalar(0.01 + i * POSITION_EPSILON);
         return clone
     })
 
