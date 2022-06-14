@@ -21,9 +21,19 @@ export const createMeshGroup = () => {
         color: 'indigo',
     });
     const protoSphere = new Mesh(geometry, material);
+    // create twenty clones of the protoSphere
+    const clones = new Array(20).fill(null).map((_, i) => {
+        const clone = protoSphere.clone()
+        clone.position.x = Math.cos(2 * Math.PI * i * 0.05)
+        clone.position.y = Math.sin(2 * Math.PI * i * 0.05)
+        clone.scale.multiplyScalar(0.01 + i * 0.05);
+        return clone
+    })
 
     // add the sphere to the group
-    group.add(protoSphere);
+    group.add(protoSphere, ...clones);
+    // every sphere inside the group will be scaled
+    group.scale.multiplyScalar(2);
 
     return new MeshGroupWithTick(group)
 }
