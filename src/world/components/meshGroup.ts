@@ -1,4 +1,5 @@
 import { Group, Mesh, MeshStandardMaterial, Scene, SphereBufferGeometry } from "three";
+import { RADIANS_PER_SECOND } from "../../constants";
 
 export class MeshGroupWithTick {
     private __internal: Group;
@@ -7,7 +8,9 @@ export class MeshGroupWithTick {
         this.__internal = group;
     }
 
-    tick() {}
+    tick(delta: number) {
+        this.__internal.rotation.z -= delta * RADIANS_PER_SECOND;
+    }
 
     addToScene(scene: Scene) {
         scene.add(this.__internal)

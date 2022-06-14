@@ -8,8 +8,8 @@ const container = document.getElementById("root") as HTMLElement;
 // create a new world
 const world = new World(container);
 
-// render the inital frame
-world.render();
+// start the animation loop
+world.start();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
