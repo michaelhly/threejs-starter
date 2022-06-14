@@ -22,12 +22,11 @@ export class World {
       container.append(this._renderer.domElement);
   
       const cube = createCube();
-      const light = createLights();
+      cube.addToScene(this._scene)
+      const { ambientLight, mainLight } = createLights();
+      this._scene.add(ambientLight, mainLight);
 
       this._loop.updateables.push(cube);
-      
-      cube.addToScene(this._scene)
-      this._scene.add(light);
   
       new Resizer(container, this._camera, this._renderer);
     }
