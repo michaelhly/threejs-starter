@@ -1,6 +1,6 @@
 {
   "name": "threejs-starter",
-  "homepage": "https://michaelhly.github.io/threejs-starter"
+  "homepage": "https://michaelhly.github.io/threejs-starter",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
