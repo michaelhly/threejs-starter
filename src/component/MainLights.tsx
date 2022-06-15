@@ -1,8 +1,15 @@
+import { Color } from "three";
+
 export const MainLights: React.FC = () => {
+  const white = new Color("white");
   return (
     <>
-      <ambientLight />
-      <pointLight position={[10, 10, 10]} />
+      <hemisphereLight
+        color={white}
+        groundColor={new Color("darkslategrey")}
+        intensity={5}
+      />
+      <directionalLight color={white} intensity={4} position={[10, 10, 10]} />
     </>
   );
 };
