@@ -9,7 +9,7 @@ export const MainLights: React.FC = () => {
         groundColor={new Color("darkslategrey")}
         intensity={5}
       />
-      <directionalLight color={white} intensity={4} position={[10, 10, 10]} />
+      <directionalLight color={white} intensity={2} position={[10, 10, 10]} />
     </>
   );
 };

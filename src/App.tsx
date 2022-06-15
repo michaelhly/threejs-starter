@@ -3,6 +3,9 @@ import { OrbitControls } from "@react-three/drei";
 import { Box } from "./component/Box";
 import { MainLights } from "./component/MainLights";
 import { useWindowDimensions } from "./hooks/useWindowDimensions";
+import Flamingo from "./component/Flamingo";
+import Parrot from "./component/Parrot";
+import Stork from "./component/Stork";
 
 function App() {
   const { width, height } = useWindowDimensions();
@@ -19,8 +22,9 @@ function App() {
       }}
     >
       <MainLights />
-      <Box position={[-1.2, 0, 0]} />
-      <Box position={[1.2, 0, 0]} />
+      <Flamingo position={[7.5, 0, -10]} />
+      <Parrot position={[0, 0, 2.5]} />
+      <Stork position={[0, -2.5, -10]} />
       <OrbitControls />
     </Canvas>
   );
