@@ -1,8 +1,8 @@
 import { PerspectiveCamera, Scene, WebGLRenderer } from "three";
 
 import { createCamera } from "./components/camera";
+import { createAxesHelper, createGridHelper } from "./components/helpers";
 import { createLights } from "./components/lights";
-import { createMeshGroup } from "./components/meshGroup";
 import { createScene } from "./components/scene";
 import { createControls } from "./systems/controls";
 import { Loop } from "./systems/Loop";
@@ -24,10 +24,9 @@ export class World {
 
       const controls = createControls(this._camera, this._renderer.domElement);
       controls.addEventListener("change", () => { this.render() })
-      const sphereGroup = createMeshGroup();
-      sphereGroup.addToScene(this._scene)
 
-      this._loop.updateables.push(controls, sphereGroup);
+       // add the helpers to the scene
+      this._scene.add(createAxesHelper(), createGridHelper());
   
       const { ambientLight, mainLight } = createLights();
       this._scene.add(ambientLight, mainLight);
