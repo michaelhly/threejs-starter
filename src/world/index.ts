@@ -4,6 +4,7 @@ import { createCamera } from "./components/camera";
 import { createAxesHelper, createGridHelper } from "./components/helpers";
 import { createLights } from "./components/lights";
 import { createScene } from "./components/scene";
+import { Train } from "./components/train";
 import { createControls } from "./systems/controls";
 import { Loop } from "./systems/Loop";
 import { createRenderer } from "./systems/renderer";
@@ -24,12 +25,12 @@ export class World {
 
       const controls = createControls(this._camera, this._renderer.domElement);
       controls.addEventListener("change", () => { this.render() })
-
-       // add the helpers to the scene
-      this._scene.add(createAxesHelper(), createGridHelper());
-  
+ 
+      const train = new Train();
       const { ambientLight, mainLight } = createLights();
-      this._scene.add(ambientLight, mainLight);
+      this._scene.add(ambientLight, mainLight, train);
+      // add the helpers to the scene
+      this._scene.add(createAxesHelper(), createGridHelper());
 
       new Resizer(container, this._camera, this._renderer);
     }
