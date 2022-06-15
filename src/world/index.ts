@@ -32,6 +32,8 @@ export class World {
       // add the helpers to the scene
       this._scene.add(createAxesHelper(), createGridHelper());
 
+      this._loop.updateables.push(train);
+
       new Resizer(container, this._camera, this._renderer);
     }
   
