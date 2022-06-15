@@ -1,4 +1,5 @@
 import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
 import { Box } from "./component/Box";
 import { MainLights } from "./component/MainLights";
 import { useWindowDimensions } from "./hooks/useWindowDimensions";
@@ -20,6 +21,7 @@ function App() {
       <MainLights />
       <Box position={[-1.2, 0, 0]} />
       <Box position={[1.2, 0, 0]} />
+      <OrbitControls />
     </Canvas>
   );
 }
