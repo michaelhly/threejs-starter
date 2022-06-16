@@ -6,6 +6,8 @@ import * as THREE from "three";
 import { useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
+import { useFrame } from "@react-three/fiber";
+import { useAnimationMixer } from "../hooks/useAnimationMixer";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -18,16 +20,19 @@ type GLTFResult = GLTF & {
 };
 
 type ActionName = "KeyAction";
-interface GLTFAction extends THREE.AnimationClip {
-  name: ActionName;
-}
+type GLTFAction = Record<ActionName, THREE.AnimationAction>;
 
 export default function Parrot({ ...props }: JSX.IntrinsicElements["group"]) {
   const group = useRef<THREE.Group>() as React.MutableRefObject<THREE.Group>;
-  const { nodes, materials, animations } = useGLTF(
+  const { nodes, materials, animations, scene } = useGLTF(
     "/assets/models/Parrot.glb"
   ) as GLTFResult;
-  const { actions } = useAnimations(animations, group);
+  const { clips } = useAnimations(animations);
+  const mixer = useAnimationMixer(scene, clips);
+  useFrame((_, delta) => {
+    mixer.update(delta);
+  });
+
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">
